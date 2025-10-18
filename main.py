@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import requests
 from datetime import datetime, timedelta
-import csv
+import pandas as pd
 
 currency = input("Currency: ")
 start_date = input("Start Date (YYYY-MM-DD): ")
@@ -41,14 +41,9 @@ while current <= end:
     
     current+= timedelta(days=1)
 
-all_currency = sorted(list(all_currency))
+# pandas
+data_frame = pd.DataFrame(data)
 filename = f"xrates_{currency}_{start_date}_to_{end_date}.csv"
+data_frame.to_csv(filename, index=False)
 
-with open(filename, "w", newline="") as f:
-    writer = csv.writer(f)
-    writer.writerow(["Date"] + all_currency)
-    for day_data in data:
-        row = [day_data.get("Date")] + [day_data.get(value, "") for value in all_currency]
-        writer.writerow(row)
-
-print(f"\nData saved in file{filename}")
+print(f"Data saved in {filename}.")
