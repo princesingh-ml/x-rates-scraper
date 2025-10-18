@@ -31,10 +31,10 @@ while current <= end:
                 continue
             col = [td.get_text(strip=True) for td in row.find_all("td")]
             if len(col) == 3:
-                day_data[col[0] + f"1.00 {currency}"] = float(col[1])
-                day_data[col[0] + f"inv. 1.00 {currency}"] = float(col[2])
-                all_currency.add(col[0] + f"1.00 {currency}")
-                all_currency.add(col[0] + f"inv. 1.00 {currency}")
+                day_data[col[0] + f" 1.00 {currency}"] = float(col[1])
+                day_data[col[0] + f" inv. 1.00 {currency}"] = float(col[2])
+                all_currency.add(col[0] + f" 1.00 {currency}")
+                all_currency.add(col[0] + f" inv. 1.00 {currency}")
         data.append(day_data)
     else:
         print("No table found.")
